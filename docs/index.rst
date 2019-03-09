@@ -1,7 +1,7 @@
-eth-account
+newchain-account
 ==============================
 
-Sign Ethereum transactions and messages with local private keys
+Sign NewChain transactions and messages with local private keys
 
 Contents
 --------
@@ -9,8 +9,8 @@ Contents
 .. toctree::
     :maxdepth: 3
 
-    eth_account
-    eth_account.signers
+    newchain_account
+    newchain_account.signers
     releases
 
 

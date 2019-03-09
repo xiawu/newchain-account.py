@@ -9,7 +9,7 @@ from hexbytes import (
     HexBytes,
 )
 
-from eth_account._utils.signing import (
+from newchain_account._utils.signing import (
     signature_wrapper,
 )
 
@@ -42,7 +42,7 @@ def defunct_hash_message(primitive=None, hexstr=None, text=None):
 
     .. code-block:: python
 
-        >>> from eth_account.messages import defunct_hash_message
+        >>> from newchain_account.messages import defunct_hash_message
 
         >>> msg = "I♥SF"
         >>> defunct_hash_message(text=msg)

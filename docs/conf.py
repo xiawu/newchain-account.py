@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# eth-account documentation build configuration file, created by
+# newchain-account documentation build configuration file, created by
 # sphinx-quickstart on Thu Oct 16 20:43:24 2014.
 #
 # This file is execfile()d with the current directory set to its
@@ -53,8 +53,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'eth-account'
-copyright = '2018, Jason Carver, Piper Merriam'
+project = 'newchain-account'
+copyright = '2019, Xia Wu'
 
 __version__ = setup_version
 # The version info for the project you're documenting, acts as replacement for
@@ -81,7 +81,7 @@ release = __version__
 exclude_patterns = [
     '_build',
     'modules.rst',
-    'eth_account.internal.rst',
+    'newchain_account.internal.rst',
 ]
 
 # The reST default role (used for this markup: `text`) to use for all
@@ -190,7 +190,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'eth_accountdoc'
+htmlhelp_basename = 'newchain_accountdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -210,7 +210,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'eth_account.tex', 'eth-account Documentation',
+  ('index', 'newchain_account.tex', 'newchain-account Documentation',
    'Jason Carver', 'manual'),
 ]
 
@@ -240,7 +240,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'eth_account', 'eth-account Documentation',
+    ('index', 'newchain_account', 'newchain-account Documentation',
      ['Jason Carver'], 1)
 ]
 
@@ -254,8 +254,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'eth-account', 'eth-account Documentation',
-   'Jason Carver', 'eth-account', 'Sign Ethereum transactions and messages with local private keys',
+  ('index', 'newchain-account', 'newchain-account Documentation',
+   'Jason Carver', 'newchain-account', 'Sign NewChain transactions and messages with local private keys',
    'Miscellaneous'),
 ]
 

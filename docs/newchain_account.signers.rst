@@ -1,11 +1,11 @@
 Signers
 ============================
 
-These classes abstract away the private key, as opposed to :class:`eth_account.account.Account`,
+These classes abstract away the private key, as opposed to :class:`newchain_account.account.Account`,
 which explicitly requires the private key on each usage.
 
 All the signer classes in this package must meet the
-interface specified by :class:`~eth_account.signers.base.BaseAccount`.
+interface specified by :class:`~newchain_account.signers.base.BaseAccount`.
 
 Currently there is only one Local Signer.
 Some upcoming alternatives to the basic local signer include
@@ -14,7 +14,7 @@ hierarchical deterministic (HD) wallets and hardware wallets.
 Local Signer
 ---------------------------------
 
-.. automodule:: eth_account.signers.local
+.. automodule:: newchain_account.signers.local
     :members:
     :undoc-members:
     :show-inheritance:
@@ -23,7 +23,7 @@ Local Signer
 Abstract Signer
 --------------------------------
 
-.. automodule:: eth_account.signers.base
+.. automodule:: newchain_account.signers.base
     :members:
     :undoc-members:
     :show-inheritance:

@@ -35,19 +35,19 @@ extras_require['dev'] = (
 )
 
 setup(
-    name='eth-account',
+    name='newchain-account',
     # *IMPORTANT*: Don't manually change the version here. Use `make bump`, as described in readme
     version='0.3.0',
-    description="""eth-account: Sign Ethereum transactions and messages with local private keys""",
+    description="""newchain-account: Sign NewChain transactions and messages with local private keys""",
     long_description_markdown_filename='README.md',
-    author='Jason Carver',
-    author_email='ethcalibur+pip@gmail.com',
-    url='https://github.com/ethereum/eth-account',
+    author='Xia Wu',
+    author_email='xiawu@zeuux.org',
+    url='https://github.com/xiawu/newchain-account.py',
     include_package_data=True,
     install_requires=[
         "attrdict>=2.0.0,<3",
         "eth-keyfile>=0.5.0,<0.6.0",
-        "eth-keys>=0.2.0b3,<0.3.0",
+        "newchain-keys>=0.1.0",
         "eth-utils>=1.0.2,<2",
         "hexbytes>=0.1.0,<1",
         "eth-rlp>=0.1.2,<1",
@@ -55,10 +55,10 @@ setup(
     setup_requires=['setuptools-markdown'],
     python_requires='>=3.5, <4',
     extras_require=extras_require,
-    py_modules=['eth_account'],
+    py_modules=['newchain_account'],
     license="MIT",
     zip_safe=False,
-    keywords='ethereum',
+    keywords='NewChain',
     packages=find_packages(exclude=["tests", "tests.*"]),
     classifiers=[
         'Development Status :: 3 - Alpha',

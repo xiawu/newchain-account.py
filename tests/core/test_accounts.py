@@ -22,10 +22,10 @@ from hexbytes import (
     HexBytes,
 )
 
-from eth_account import (
+from newchain_account import (
     Account,
 )
-from eth_account.messages import (
+from newchain_account.messages import (
     defunct_hash_message,
 )
 
@@ -98,32 +98,32 @@ def acct(request):
     return Account
 
 
-def test_eth_account_default_kdf(acct, monkeypatch):
-    assert os.getenv('ETH_ACCOUNT_KDF') is None
+def test_newchain_account_default_kdf(acct, monkeypatch):
+    assert os.getenv('NEWCHAIN_ACCOUNT_KDF') is None
     assert acct.default_kdf == 'scrypt'
 
-    monkeypatch.setenv('ETH_ACCOUNT_KDF', 'pbkdf2')
-    assert os.getenv('ETH_ACCOUNT_KDF') == 'pbkdf2'
+    monkeypatch.setenv('NEWCHAIN_ACCOUNT_KDF', 'pbkdf2')
+    assert os.getenv('NEWCHAIN_ACCOUNT_KDF') == 'pbkdf2'
 
     import importlib
-    from eth_account import account
+    from newchain_account import account
     importlib.reload(account)
     assert account.Account.default_kdf == 'pbkdf2'
 
 
-def test_eth_account_create_variation(acct):
+def test_newchain_account_create_variation(acct):
     account1 = acct.create()
     account2 = acct.create()
     assert account1 != account2
 
 
-def test_eth_account_equality(acct, PRIVATE_KEY):
+def test_newchain_account_equality(acct, PRIVATE_KEY):
     acct1 = acct.privateKeyToAccount(PRIVATE_KEY)
     acct2 = acct.privateKeyToAccount(PRIVATE_KEY)
     assert acct1 == acct2
 
 
-def test_eth_account_privateKeyToAccount_reproducible(acct, PRIVATE_KEY):
+def test_newchain_account_privateKeyToAccount_reproducible(acct, PRIVATE_KEY):
     account1 = acct.privateKeyToAccount(PRIVATE_KEY)
     account2 = acct.privateKeyToAccount(PRIVATE_KEY)
     assert bytes(account1) == PRIVATE_KEY_AS_BYTES
@@ -131,14 +131,14 @@ def test_eth_account_privateKeyToAccount_reproducible(acct, PRIVATE_KEY):
     assert isinstance(str(account1), str)
 
 
-def test_eth_account_privateKeyToAccount_diverge(acct, PRIVATE_KEY, PRIVATE_KEY_ALT):
+def test_newchain_account_privateKeyToAccount_diverge(acct, PRIVATE_KEY, PRIVATE_KEY_ALT):
     account1 = acct.privateKeyToAccount(PRIVATE_KEY)
     account2 = acct.privateKeyToAccount(PRIVATE_KEY_ALT)
     assert bytes(account2) == PRIVATE_KEY_AS_BYTES_ALT
     assert bytes(account1) != bytes(account2)
 
 
-def test_eth_account_privateKeyToAccount_seed_restrictions(acct):
+def test_newchain_account_privateKeyToAccount_seed_restrictions(acct):
     with pytest.raises(ValueError):
         acct.privateKeyToAccount(b'')
     with pytest.raises(ValueError):
@@ -147,7 +147,7 @@ def test_eth_account_privateKeyToAccount_seed_restrictions(acct):
         acct.privateKeyToAccount(b'\xff' * 33)
 
 
-def test_eth_account_privateKeyToAccount_properties(acct, PRIVATE_KEY):
+def test_newchain_account_privateKeyToAccount_properties(acct, PRIVATE_KEY):
     account = acct.privateKeyToAccount(PRIVATE_KEY)
     assert callable(account.signHash)
     assert callable(account.signTransaction)
@@ -156,7 +156,7 @@ def test_eth_account_privateKeyToAccount_properties(acct, PRIVATE_KEY):
     assert account.privateKey == PRIVATE_KEY_AS_OBJ
 
 
-def test_eth_account_create_properties(acct):
+def test_newchain_account_create_properties(acct):
     account = acct.create()
     assert callable(account.signHash)
     assert callable(account.signTransaction)
@@ -164,19 +164,19 @@ def test_eth_account_create_properties(acct):
     assert isinstance(account.privateKey, bytes) and len(account.privateKey) == 32
 
 
-def test_eth_account_recover_transaction_example(acct):
+def test_newchain_account_recover_transaction_example(acct):
     raw_tx_hex = '0xf8640d843b9aca00830e57e0945b2063246f2191f18f2675cedb8b28102e957458018025a00c753084e5a8290219324c1a3a86d4064ded2d15979b1ea790734aaa2ceaafc1a0229ca4538106819fd3a5509dd383e8fe4b731c6870339556a5c06feb9cf330bb'  # noqa: E501
     from_account = acct.recoverTransaction(raw_tx_hex)
     assert from_account == '0xFeC2079e80465cc8C687fFF9EE6386ca447aFec4'
 
 
-def test_eth_account_recover_transaction_with_literal(acct):
+def test_newchain_account_recover_transaction_with_literal(acct):
     raw_tx = 0xf8640d843b9aca00830e57e0945b2063246f2191f18f2675cedb8b28102e957458018025a00c753084e5a8290219324c1a3a86d4064ded2d15979b1ea790734aaa2ceaafc1a0229ca4538106819fd3a5509dd383e8fe4b731c6870339556a5c06feb9cf330bb  # noqa: E501
     from_account = acct.recoverTransaction(raw_tx)
     assert from_account == '0xFeC2079e80465cc8C687fFF9EE6386ca447aFec4'
 
 
-def test_eth_account_recover_message(acct):
+def test_newchain_account_recover_message(acct):
     v, r, s = (
         28,
         '0xe6ca9bba58c88611fad66a6ce8f996908195593807c4b38bd528d2cff09d4eb3',
@@ -198,13 +198,13 @@ def test_eth_account_recover_message(acct):
     ],
     ids=['test_sig_bytes_standard_v', 'test_sig_bytes_chain_naive_v']
 )
-def test_eth_account_recover_signature_bytes(acct, signature_bytes):
+def test_newchain_account_recover_signature_bytes(acct, signature_bytes):
     msg_hash = b'\xbb\r\x8a\xba\x9f\xf7\xa1<N,s{i\x81\x86r\x83{\xba\x9f\xe2\x1d\xaa\xdd\xb3\xd6\x01\xda\x00\xb7)\xa1'  # noqa: E501
     from_account = acct.recoverHash(msg_hash, signature=signature_bytes)
     assert from_account == '0xFeC2079e80465cc8C687fFF9EE6386ca447aFec4'
 
 
-def test_eth_account_recover_vrs(acct):
+def test_newchain_account_recover_vrs(acct):
     v, r, s = (
         27,
         5634810156301565519126305729385531885322755941350706789683031279718535704513,
@@ -218,7 +218,7 @@ def test_eth_account_recover_vrs(acct):
     assert from_account == '0xFeC2079e80465cc8C687fFF9EE6386ca447aFec4'
 
 
-def test_eth_account_recover_vrs_standard_v(acct):
+def test_newchain_account_recover_vrs_standard_v(acct):
     v, r, s = (
         0,
         5634810156301565519126305729385531885322755941350706789683031279718535704513,
@@ -248,7 +248,7 @@ def test_eth_account_recover_vrs_standard_v(acct):
     ],
     ids=['message_to_sign', 'hexstr_as_text', 'hello_world']
 )
-def test_eth_account_hash_message_text(message, expected):
+def test_newchain_account_hash_message_text(message, expected):
     assert defunct_hash_message(text=message) == expected
 
 
@@ -266,7 +266,7 @@ def test_eth_account_hash_message_text(message, expected):
     ],
     ids=['hexbytes_1', 'hexbytes_2']
 )
-def test_eth_account_hash_message_hexstr(acct, message, expected):
+def test_newchain_account_hash_message_hexstr(acct, message, expected):
     assert defunct_hash_message(hexstr=message) == expected
 
 
@@ -307,7 +307,7 @@ def test_eth_account_hash_message_hexstr(acct, message, expected):
     ),
     ids=['web3js_hex_str_example', 'web3js_eth_keys.datatypes.PrivateKey_example', '31byte_r_and_s'],  # noqa: E501
 )
-def test_eth_account_sign(acct, message, key, expected_bytes, expected_hash, v, r, s, signature):
+def test_newchain_account_sign(acct, message, key, expected_bytes, expected_hash, v, r, s, signature):
     msghash = defunct_hash_message(text=message)
     assert msghash == expected_hash
     signed = acct.signHash(msghash, private_key=key)
@@ -376,7 +376,7 @@ def test_eth_account_sign(acct, message, key, expected_bytes, expected_hash, v, 
     ),
     ids=['web3js_hex_str_example', 'web3js_eth_keys.datatypes.PrivateKey_example', '31byte_r_and_s'],  # noqa: E501
 )
-def test_eth_account_sign_transaction(acct, txn, private_key, expected_raw_tx, tx_hash, r, s, v):
+def test_newchain_account_sign_transaction(acct, txn, private_key, expected_raw_tx, tx_hash, r, s, v):
     signed = acct.signTransaction(txn, private_key)
     assert signed.r == r
     assert signed.s == s
@@ -392,7 +392,7 @@ def test_eth_account_sign_transaction(acct, txn, private_key, expected_raw_tx, t
     'transaction',
     ETH_TEST_TRANSACTIONS,
 )
-def test_eth_account_sign_transaction_from_eth_test(acct, transaction):
+def test_newchain_account_sign_transaction_from_eth_test(acct, transaction):
     expected_raw_txn = transaction['signed']
     key = transaction['key']
 
@@ -415,7 +415,7 @@ def test_eth_account_sign_transaction_from_eth_test(acct, transaction):
     'transaction',
     ETH_TEST_TRANSACTIONS,
 )
-def test_eth_account_recover_transaction_from_eth_test(acct, transaction):
+def test_newchain_account_recover_transaction_from_eth_test(acct, transaction):
     raw_txn = transaction['signed']
     key = transaction['key']
     expected_sender = acct.privateKeyToAccount(key).address
@@ -498,7 +498,7 @@ def get_encrypt_test_params():
         'hex_str_scrypt_provided_iterations',
     ]
 )
-def test_eth_account_encrypt(
+def test_newchain_account_encrypt(
         acct,
         private_key,
         password,
@@ -544,7 +544,7 @@ def test_eth_account_encrypt(
         'hex_str_scrypt_provided_iterations',
     ]
 )
-def test_eth_account_prepared_encrypt(
+def test_newchain_account_prepared_encrypt(
         acct,
         private_key,
         password,

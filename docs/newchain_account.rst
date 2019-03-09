@@ -4,16 +4,16 @@ eth\_account
 Account
 ----------------------------
 
-.. automodule:: eth_account.account
+.. automodule:: newchain_account.account
     :members:
     :undoc-members:
 
-See :doc:`eth_account.signers` for alternative signers.
+See :doc:`newchain_account.signers` for alternative signers.
 
 AttributeDict
 -----------------------------------
 
-.. automodule:: eth_account.datastructures
+.. automodule:: newchain_account.datastructures
     :members:
     :undoc-members:
     :show-inheritance:
@@ -21,7 +21,7 @@ AttributeDict
 Messages
 ---------------------------
 
-.. automodule:: eth_account.messages
+.. automodule:: newchain_account.messages
     :members:
     :undoc-members:
     :show-inheritance:

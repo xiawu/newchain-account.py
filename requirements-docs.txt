@@ -1,1 +1,1 @@
-eth-account[doc]
+newchain-account[doc]

@@ -25,7 +25,7 @@ lint:
 	tox -elint
 
 lint-roll:
-	isort --recursive eth_account tests
+	isort --recursive newchain_account tests
 	$(MAKE) lint
 
 test:

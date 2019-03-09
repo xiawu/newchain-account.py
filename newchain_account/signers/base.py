@@ -27,7 +27,7 @@ class BaseAccount(ABC):
     @abstractmethod
     def signHash(self, message_hash):
         '''
-        Sign the hash of a message, as in :meth:`~eth_account.account.Account.signHash`
+        Sign the hash of a message, as in :meth:`~newchain_account.account.Account.signHash`
         but without specifying the private key.
 
         :var bytes message_hash: 32 byte hash of the message to sign
@@ -37,7 +37,7 @@ class BaseAccount(ABC):
     @abstractmethod
     def signTransaction(self, transaction_dict):
         '''
-        Sign a transaction, as in :meth:`~eth_account.account.Account.signTransaction`
+        Sign a transaction, as in :meth:`~newchain_account.account.Account.signTransaction`
         but without specifying the private key.
 
         :var dict transaction_dict: transaction with all fields specified

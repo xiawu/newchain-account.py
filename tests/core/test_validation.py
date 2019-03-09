@@ -5,7 +5,7 @@ from cytoolz import (
     dissoc,
 )
 
-from eth_account import (
+from newchain_account import (
     Account,
 )
 

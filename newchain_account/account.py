@@ -31,21 +31,21 @@ from hexbytes import (
     HexBytes,
 )
 
-from eth_account._utils.signing import (
+from newchain_account._utils.signing import (
     hash_of_signed_transaction,
     sign_message_hash,
     sign_transaction_dict,
     to_standard_signature_bytes,
     to_standard_v,
 )
-from eth_account._utils.transactions import (
+from newchain_account._utils.transactions import (
     Transaction,
     vrs_from,
 )
-from eth_account.datastructures import (
+from newchain_account.datastructures import (
     AttributeDict,
 )
-from eth_account.signers.local import (
+from newchain_account.signers.local import (
     LocalAccount,
 )
 
@@ -58,17 +58,17 @@ class Account(object):
     '''
     _keys = keys
 
-    default_kdf = os.getenv('ETH_ACCOUNT_KDF', 'scrypt')
+    default_kdf = os.getenv('NEWCHAIN_ACCOUNT_KDF', 'scrypt')
     '''
     The default key deriviation function (KDF) to use when encrypting a private key. If the
-    environment variable :envvar:`ETH_ACCOUNT_KDF` is set, it's value will be used as the default.
+    environment variable :envvar:`NEWCHAIN_ACCOUNT_KDF` is set, it's value will be used as the default.
     Otherwise, 'scrypt' will be used as the default.
     '''
 
     @combomethod
     def create(self, extra_entropy=''):
         '''
-        Creates a new private key, and returns it as a :class:`~eth_account.local.LocalAccount`.
+        Creates a new private key, and returns it as a :class:`~newchain_account.local.LocalAccount`.
 
         :param extra_entropy: Add extra randomness to whatever randomness your OS can provide
         :type extra_entropy: str or bytes or int
@@ -76,7 +76,7 @@ class Account(object):
 
         .. code-block:: python
 
-            >>> from eth_account import Account
+            >>> from newchain_account import Account
             >>> acct = Account.create('KEYSMASH FJAFJKLDSKF7JKFDJ 1530')
             >>> acct.address
             '0x5ce9454909639D2D17A3F753ce7d93fa0b9aB12E'
@@ -340,7 +340,7 @@ class Account(object):
 
         If you would like compatibility with
         :meth:`w3.eth.sign() <web3.eth.Eth.sign>`
-        you can use :meth:`~eth_account.messages.defunct_hash_message`.
+        you can use :meth:`~newchain_account.messages.defunct_hash_message`.
 
         Several other message standards are proposed, but none have a clear
         consensus. You'll need to manually comply with any of those message standards manually.
@@ -351,12 +351,12 @@ class Account(object):
         :type private_key: hex str, bytes, int or :class:`eth_keys.datatypes.PrivateKey`
         :returns: Various details about the signature - most
           importantly the fields: v, r, and s
-        :rtype: ~eth_account.datastructures.AttributeDict
+        :rtype: ~newchain_account.datastructures.AttributeDict
 
         .. code-block:: python
 
             >>> msg = "I♥SF"
-            >>> from eth_account.messages import defunct_hash_message
+            >>> from newchain_account.messages import defunct_hash_message
             >>> msghash = defunct_hash_message(text=msg)
             HexBytes('0x1476abb745d423bf09273f1afd887d951181d25adc66c4834a70491911b7f750')
             >>> key = "0xb25c7db31feed9122727bf0939dc769a96564b2de4c4726d035b36ecf1e5b364"
