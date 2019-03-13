@@ -25,7 +25,7 @@ class LocalAccount(BaseAccount):
     '''
     def __init__(self, key, account):
         '''
-        :param eth_keys.PrivateKey key: to prefill in private key execution
+        :param newchain_keys.PrivateKey key: to prefill in private key execution
         :param ~newchain_account.account.Account account: the key-unaware management API
         '''
         self._publicapi = account
