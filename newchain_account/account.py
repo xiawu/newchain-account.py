@@ -49,12 +49,14 @@ from newchain_account.signers.local import (
     LocalAccount,
 )
 
+MAINNET_CHAIN_ID = 1012
+TESTNET_CHAIN_ID = 1007
 
 class Account(object):
     '''
-    This is the primary entry point for working with Ethereum private keys.
+    This is the primary entry point for working with NewChain private keys.
 
-    It does **not** require a connection to an Ethereum node.
+    It does **not** require a connection to an NewChain node.
     '''
     _keys = keys
 
@@ -66,7 +68,7 @@ class Account(object):
     '''
 
     @combomethod
-    def create(self, extra_entropy=''):
+    def create(self, extra_entropy='', chain_id=MAINNET_CHAIN_ID):
         '''
         Creates a new private key, and returns it as a :class:`~newchain_account.local.LocalAccount`.
 
@@ -87,6 +89,7 @@ class Account(object):
             # They correspond to the same-named methods in Account.*
             # but without the private key argument
         '''
+        self.chain_id = chain_id
         extra_key_bytes = text_if_str(to_bytes, extra_entropy)
         key_bytes = keccak(os.urandom(32) + extra_key_bytes)
         return self.privateKeyToAccount(key_bytes)
@@ -219,7 +222,7 @@ class Account(object):
             # but without the private key argument
         '''
         key = self._parsePrivateKey(private_key)
-        return LocalAccount(key, self)
+        return LocalAccount(key, self, self.chain_id)
 
     @combomethod
     def recoverHash(self, message_hash, vrs=None, signature=None):

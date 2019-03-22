@@ -1,3 +1,5 @@
+import base58
+import binascii
 from newchain_account.signers.base import (
     BaseAccount,
 )
@@ -23,7 +25,7 @@ class LocalAccount(BaseAccount):
         >>> bytes(my_local_account)
         b"\\x01\\x23..."
     '''
-    def __init__(self, key, account):
+    def __init__(self, key, account, chain_id):
         '''
         :param newchain_keys.PrivateKey key: to prefill in private key execution
         :param ~newchain_account.account.Account account: the key-unaware management API
@@ -37,9 +39,28 @@ class LocalAccount(BaseAccount):
 
         self._key_obj = key
 
+        self._chain_id = chain_id
+        self._new_address = self.__encode_new_address()
+
+    def __encode_new_address(self):
+        address_data = self._address
+        if address_data.startswith('0x'):
+            address_data = address_data[2:]
+        hex_chainID = hex(self._chain_id)[2:][-8:]
+        if (len(hex_chainID) % 2) == 1:
+            hex_chainID = '0' + hex_chainID
+        num_sum = hex_chainID + address_data
+        data = base58.b58encode_check(b'\0' + binascii.a2b_hex(num_sum))
+        new_address = 'NEW' + data.decode()
+        return new_address
+
     @property
     def address(self):
         return self._address
+
+    @property
+    def new_address(self):
+        return self._new_address
 
     @property
     def privateKey(self):

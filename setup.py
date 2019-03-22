@@ -51,6 +51,7 @@ setup(
         "eth-utils>=1.0.2,<2",
         "hexbytes>=0.1.0,<1",
         "eth-rlp>=0.1.2,<1",
+        "base58>=1.0.3",
     ],
     setup_requires=['setuptools-markdown'],
     python_requires='>=3.5, <4',
