@@ -37,7 +37,7 @@ extras_require['dev'] = (
 setup(
     name='newchain-account',
     # *IMPORTANT*: Don't manually change the version here. Use `make bump`, as described in readme
-    version="0.2.0",
+    version="0.2.1",
     description="""newchain-account: Sign NewChain transactions and messages with local private keys""",
     long_description_markdown_filename='README.md',
     author='Xia Wu',
