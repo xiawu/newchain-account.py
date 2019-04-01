@@ -47,7 +47,7 @@ setup(
     install_requires=[
         "attrdict>=2.0.0,<3",
         "eth-keyfile>=0.5.0,<0.6.0",
-        "newchain-keys>=0.2.0",
+        "newchain-keys>=0.1.0",
         "eth-utils>=1.0.2,<2",
         "hexbytes>=0.2.0,<1",
         "eth-rlp>=0.1.2,<1",
