@@ -7,7 +7,7 @@ import os
 from cytoolz import (
     dissoc,
 )
-from eth_keyfile import (
+from newchain_keyfile import (
     create_keyfile_json,
     decode_keyfile_json,
 )

@@ -6,7 +6,7 @@ import pytest
 from cytoolz import (
     dissoc,
 )
-from eth_keyfile.keyfile import (
+from newchain_keyfile.keyfile import (
     get_default_work_factor_for_kdf,
 )
 from eth_keys import (
