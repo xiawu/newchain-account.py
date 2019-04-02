@@ -37,7 +37,7 @@ extras_require['dev'] = (
 setup(
     name='newchain-account',
     # *IMPORTANT*: Don't manually change the version here. Use `make bump`, as described in readme
-    version="0.2.2",
+    version="0.2.3",
     description="""newchain-account: Sign NewChain transactions and messages with local private keys""",
     long_description_markdown_filename='README.md',
     author='Xia Wu',
@@ -46,7 +46,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "attrdict>=2.0.0,<3",
-        "eth-keyfile>=0.5.0,<0.6.0",
+        "newchain-keyfile>=0.1.0",
         "newchain-keys>=0.1.0",
         "eth-utils>=1.0.2,<2",
         "hexbytes>=0.1.0,<1",
