@@ -199,7 +199,7 @@ class Account(object):
         return create_keyfile_json(key_bytes, password_bytes, kdf=kdf, iterations=iterations)
 
     @combomethod
-    def privateKeyToAccount(self, private_key):
+    def privateKeyToAccount(self, private_key, chain_id=MAINNET_CHAIN_ID):
         '''
         Returns a convenient object for working with the given private key.
 
@@ -222,6 +222,7 @@ class Account(object):
             # but without the private key argument
         '''
         key = self._parsePrivateKey(private_key)
+        self.chain_id = chain_id
         return LocalAccount(key, self, self.chain_id)
 
     @combomethod
