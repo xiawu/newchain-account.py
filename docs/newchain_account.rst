@@ -10,7 +10,7 @@ Account
 
 See :doc:`newchain_account.signers` for alternative signers.
 
-AttributeDict
+SignedTransaction & SignedMessage
 -----------------------------------
 
 .. automodule:: newchain_account.datastructures

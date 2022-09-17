@@ -8,6 +8,8 @@ Sign NewChain transactions and messages with local private keys
 pip install newchain-account
 ```
 
+## Developer Setup
+
 ## Developer setup
 
 If you would like to hack on newchain-account, please check out the
@@ -29,7 +31,16 @@ git clone git@github.com:xiawu/newchain-account.py.git
 cd newchain-account.py
 virtualenv -p python3 venv
 . venv/bin/activate
-pip install -e .[dev]
+pip install -e ".[dev]"
+```
+
+To run the integration test cases, you need to install node and the custom cli tool as follows:
+
+```sh
+apt-get install -y nodejs  # As sudo
+./tests/integration/ethers-cli/setup_node_v12.sh  # As sudo
+cd tests/integration/ethers-cli
+npm install -g .  # As sudo
 ```
 
 ### Testing Setup
@@ -78,7 +89,9 @@ The version format for this repo is `{major}.{minor}.{patch}` for stable, and
 `{major}.{minor}.{patch}-{stage}.{devnum}` for unstable (`stage` can be alpha or beta).
 
 To issue the next version in line, specify which part to bump,
-like `make release bump=minor` or `make release bump=devnum`.
+like `make release bump=minor` or `make release bump=devnum`. This is typically done from the
+master branch, except when releasing a beta (in which case the beta is released from master,
+and the previous stable branch is released from said branch).
 
 If you are in a beta version, `make release bump=stage` will switch to a stable.
 

@@ -1,1 +1,5 @@
-from newchain_account.account import Account  # noqa: F401
+from newchain_account.account import (
+    Account,
+)
+
+__all__ = ["Account"]
