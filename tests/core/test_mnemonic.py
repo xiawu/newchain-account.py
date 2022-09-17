@@ -22,7 +22,7 @@
 #
 import pytest
 
-from eth_account.hdaccount.mnemonic import (
+from newchain_account.hdaccount.mnemonic import (
     Mnemonic,
     ValidationError,
     normalize_string,

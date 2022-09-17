@@ -13,7 +13,7 @@ from cytoolz import (
 from newchain_keyfile.keyfile import (
     get_default_work_factor_for_kdf,
 )
-from eth_keys import (
+from newchain_keys import (
     keys,
 )
 from eth_utils import (
@@ -298,7 +298,7 @@ def test_newchain_account_recover_message(acct):
     ],
     ids=['test_sig_bytes_standard_v', 'test_sig_bytes_chain_naive_v']
 )
-def test_eth_account_recover_signature_bytes(acct, signature_bytes):
+def test_newchain_account_recover_signature_bytes(acct, signature_bytes):
     # found a signature with a leading 0 byte in both r and s
     message = encode_defunct(text='10284')
     from_account = acct.recover_message(message, signature=signature_bytes)

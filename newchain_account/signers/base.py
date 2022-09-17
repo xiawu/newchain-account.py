@@ -36,7 +36,7 @@ class BaseAccount(ABC):
         Sign the EIP-191_ message.
 
         This uses the same structure
-        as in :meth:`~eth_account.account.Account.sign_message`
+        as in :meth:`~newchain_account.account.Account.sign_message`
         but without specifying the private key.
 
         :param signable_message: The encoded message, ready for signing

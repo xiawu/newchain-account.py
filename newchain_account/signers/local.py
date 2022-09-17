@@ -24,7 +24,8 @@ class LocalAccount(BaseAccount):
 
         >>> bytes(my_local_account) # doctest: +SKIP
         b"\\x01\\x23..."
-    '''
+    """
+    
     def __init__(self, key, account, chain_id):
         '''
         Initialize a new account with the the given private key.
@@ -67,7 +68,7 @@ class LocalAccount(BaseAccount):
     @property
     def privateKey(self):
         """
-        .. CAUTION:: Deprecated for :meth:`~eth_account.signers.local.LocalAccount.key`.
+        .. CAUTION:: Deprecated for :meth:`~newchain_account.signers.local.LocalAccount.key`.
             This attribute will be removed in v0.5
         """
         warnings.warn(

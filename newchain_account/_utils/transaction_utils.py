@@ -9,7 +9,7 @@ from toolz import (
     dissoc,
 )
 
-from eth_account._utils.validation import (
+from newchain_account._utils.validation import (
     is_rlp_structured_access_list,
     is_rpc_structured_access_list,
 )

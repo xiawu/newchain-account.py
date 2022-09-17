@@ -4,10 +4,10 @@ from eth_utils import (
     ValidationError,
 )
 
-from eth_account import (
+from newchain_account import (
     Account,
 )
-from eth_account.hdaccount import (
+from newchain_account.hdaccount import (
     ETHEREUM_DEFAULT_PATH,
 )
 

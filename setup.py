@@ -56,7 +56,7 @@ setup(
     url='https://github.com/xiawu/newchain-account.py',
     include_package_data=True,
     package_data={
-        "eth_account": [
+        "newchain_account": [
             "py.typed",
             "hdaccount/wordlist/*.txt",
         ]

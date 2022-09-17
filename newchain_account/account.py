@@ -104,7 +104,7 @@ class Account:
     @combomethod
     def create(self, extra_entropy='', chain_id=MAINNET_CHAIN_ID):
         r"""
-        Creates a new private key, and returns it as a :class:`~eth_account.local.LocalAccount`.
+        Creates a new private key, and returns it as a :class:`~newchain_account.local.LocalAccount`.
 
         :param extra_entropy: Add extra randomness to whatever randomness your OS can provide
         :type extra_entropy: str or bytes or int
@@ -122,7 +122,7 @@ class Account:
             # These methods are also available: sign_message(), sign_transaction(), encrypt()
             # They correspond to the same-named methods in Account.*
             # but without the private key argument
-        '''
+        """
         self.chain_id = chain_id
         extra_key_bytes = text_if_str(to_bytes, extra_entropy)
         key_bytes = keccak(os.urandom(32) + extra_key_bytes)
@@ -188,7 +188,7 @@ class Account:
         :rtype: dict
 
         If kdf is not set, the default key derivation function falls back to the
-        environment variable :envvar:`ETH_ACCOUNT_KDF`. If that is not set, then
+        environment variable :envvar:`NEWCHAIN_ACCOUNT_KDF`. If that is not set, then
         'scrypt' will be used as the default.
 
         .. doctest:: python
@@ -232,7 +232,7 @@ class Account:
     @combomethod
     def privateKeyToAccount(self, private_key, chain_id=MAINNET_CHAIN_ID):
         """
-        .. CAUTION:: Deprecated for :meth:`~eth_account.account.Account.from_key`.
+        .. CAUTION:: Deprecated for :meth:`~newchain_account.account.Account.from_key`.
             This method will be removed in v0.5
         """
         warnings.warn(
@@ -287,7 +287,7 @@ class Account:
 
         .. doctest:: python
 
-            >>> from eth_account import Account
+            >>> from newchain_account import Account
             >>> Account.enable_unaudited_hdwallet_features()
             >>> acct = Account.from_mnemonic(
             ...  "coral allow abandon recipe top tray caught video climb similar prepare bracket "
@@ -301,7 +301,7 @@ class Account:
 
         Or, generate multiple accounts from a mnemonic.
 
-             >>> from eth_account import Account
+             >>> from newchain_account import Account
              >>> Account.enable_unaudited_hdwallet_features()
              >>> iterator = 0
              >>> for i in range(10):
@@ -348,7 +348,7 @@ class Account:
 
         .. CAUTION:: This feature is experimental, unaudited, and likely to change soon
 
-        Creates a new private key, and returns it as a :class:`~eth_account.local.LocalAccount`,
+        Creates a new private key, and returns it as a :class:`~newchain_account.local.LocalAccount`,
         alongside the mnemonic that can used to regenerate it using any BIP39-compatible wallet.
 
         :param str passphrase: Extra passphrase to encrypt the seed phrase
@@ -363,7 +363,7 @@ class Account:
 
         .. doctest:: python
 
-            >>> from eth_account import Account
+            >>> from newchain_account import Account
             >>> Account.enable_unaudited_hdwallet_features()
             >>> acct, mnemonic = Account.create_with_mnemonic()
             >>> acct.address # doctest: +SKIP
@@ -460,7 +460,7 @@ class Account:
         Get the address of the account that signed the message with the given hash.
         You must specify exactly one of: vrs or signature
 
-        .. CAUTION:: Deprecated for :meth:`~eth_account.account.Account.recover_message`.
+        .. CAUTION:: Deprecated for :meth:`~newchain_account.account.Account.recover_message`.
             This method might be removed as early as v0.5
 
         :param message_hash: the hash of the message that you want to verify
@@ -502,7 +502,7 @@ class Account:
     @combomethod
     def recoverTransaction(self, serialized_transaction):
         """
-        .. CAUTION:: Deprecated for :meth:`~eth_account.account.Account.recover_transaction`.
+        .. CAUTION:: Deprecated for :meth:`~newchain_account.account.Account.recover_transaction`.
             This method will be removed in v0.5
         """
         warnings.warn(
@@ -573,23 +573,23 @@ class Account:
 
         If you would like historical compatibility with
         :meth:`w3.eth.sign() <web3.eth.Eth.sign>`
-        you can use :meth:`~eth_account.messages.encode_defunct`.
+        you can use :meth:`~newchain_account.messages.encode_defunct`.
 
         Other options are the "validator", or "structured data" standards. (Both of these
         are in *DRAFT* status currently, so be aware that the implementation is not
         guaranteed to be stable). You can import all supported message encoders in
-        ``eth_account.messages``.
+        ``newchain_account.messages``.
 
         :param signable_message: the encoded message for signing
         :param private_key: the key to sign the message with
         :type private_key: hex str, bytes, int or :class:`eth_keys.datatypes.PrivateKey`
         :returns: Various details about the signature - most importantly the fields: v, r, and s
-        :rtype: ~eth_account.datastructures.SignedMessage
+        :rtype: ~newchain_account.datastructures.SignedMessage
 
         .. doctest:: python
 
             >>> msg = "I♥SF"
-            >>> from eth_account.messages import encode_defunct
+            >>> from newchain_account.messages import encode_defunct
             >>> msghash = encode_defunct(text=msg)
             >>> msghash
             SignableMessage(version=b'E',
@@ -661,7 +661,7 @@ class Account:
     @combomethod
     def signTransaction(self, transaction_dict, private_key):
         """
-        .. CAUTION:: Deprecated for :meth:`~eth_account.account.Account.sign_transaction`.
+        .. CAUTION:: Deprecated for :meth:`~newchain_account.account.Account.sign_transaction`.
             This method will be removed in v0.5
         """
         warnings.warn(
@@ -812,7 +812,7 @@ class Account:
 
     @combomethod
     def _parsePrivateKey(self, key):
-        '''
+        """
         Generate a :class:`newchain_keys.datatypes.PrivateKey` from the provided key. If the
         key is already of type :class:`newchain_keys.datatypes.PrivateKey`, return the key.
 
@@ -820,7 +820,7 @@ class Account:
                     will be generated
         :type key: hex str, bytes, int or :class:`newchain_keys.datatypes.PrivateKey`
         :returns: the provided key represented as a :class:`newchain_keys.datatypes.PrivateKey`
-        '''
+        """
         if isinstance(key, self._keys.PrivateKey):
             return key
 
