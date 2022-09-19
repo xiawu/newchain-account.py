@@ -1,3 +1,5 @@
+import base58
+import binascii
 import warnings
 
 from newchain_account.signers.base import (

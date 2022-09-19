@@ -200,7 +200,7 @@ def message_encodings(request):
 
 def test_newchain_account_default_kdf(acct, monkeypatch):
     assert os.getenv('NEWCHAIN_ACCOUNT_KDF') is None
-    assert acct.default_kdf == 'scrypt'
+    assert acct._default_kdf == 'scrypt'
 
     monkeypatch.setenv('NEWCHAIN_ACCOUNT_KDF', 'pbkdf2')
     assert os.getenv('NEWCHAIN_ACCOUNT_KDF') == 'pbkdf2'
@@ -245,6 +245,18 @@ def test_newchain_account_from_key_seed_restrictions(acct):
         acct.from_key(b'\xff' * 31)
     with pytest.raises(ValueError):
         acct.from_key(b'\xff' * 33)
+
+
+def test_newchain_account_recover_msg(acct):
+    v, r, s = (
+        28,
+        '0xf983884640e910916c0f6d8284d73d37888671e2afb6bb0bd189db9c641c852b',
+        '0xbad9626abe1fb0c0af397625d6039da631e108e6831f49ed4275f0f61523c11',
+    )
+    message_text = "I♥SF"
+    message = encode_defunct(text=message_text)
+    from_account = acct.recover_message(message, vrs=(v, r, s))
+    assert from_account == '0x827fc529Ad9FF85c9D127a1161CAfF8F2324e273'
 
 
 def test_newchain_account_from_key_properties(acct, PRIVATE_KEY):
@@ -442,7 +454,7 @@ def test_sign_message_against_sign_hash_as_hex(keyed_acct, message_bytes):
         ),
 
     ),
-    ids=['web3js_hex_str_example', 'web3js_eth_keys.datatypes.PrivateKey_example', '31byte_r_and_s'],  # noqa: E501
+    ids=['web3js_hex_str_example', 'web3js_newchain_keys.datatypes.PrivateKey_example', '31byte_r_and_s'],  # noqa: E501
 )
 def test_newchain_account_sign(acct, message, key, expected_bytes, expected_hash, v, r, s, signature):
     signable = encode_defunct(text=message)
@@ -576,7 +588,7 @@ def test_newchain_long_account_address_sign_data_with_intended_validator(acct, m
             1,
         ),
     ),
-    ids=['web3js_hex_str_example', 'web3js_eth_keys.datatypes.PrivateKey_example', '31byte_r_and_s', 'access_list_tx'],  # noqa: E501
+    ids=['web3js_hex_str_example', 'web3js_newchain_keys.datatypes.PrivateKey_example', '31byte_r_and_s', 'access_list_tx'],  # noqa: E501
 )
 def test_newchain_account_sign_transaction(acct, txn, private_key, expected_raw_tx, tx_hash, r, s, v):
     signed = acct.sign_transaction(txn, private_key)
@@ -604,7 +616,7 @@ def test_newchain_account_sign_transaction_from_eth_test(acct, transaction):
     # There is some ambiguity about whether `r` will always be deterministically
     # generated from the transaction hash and private key, mostly due to code
     # author's ignorance. The example test fixtures and implementations seem to agree, so far.
-    # See ecdsa_raw_sign() in /eth_keys/backends/native/ecdsa.py
+    # See ecdsa_raw_sign() in /newchain_keys/backends/native/ecdsa.py
     signed = acct.sign_transaction(unsigned_txn, key)
     assert signed.r == to_int(hexstr=expected_raw_txn[-130:-66])
 
@@ -692,7 +704,7 @@ def get_encrypt_test_params():
     get_encrypt_test_params(),
     ids=[
         'hex_str',
-        'eth_keys.datatypes.PrivateKey',
+        'newchain_keys.datatypes.PrivateKey',
         'hex_str_provided_kdf',
         'hex_str_default_kdf_provided_iterations',
         'hex_str_pbkdf2_provided_iterations',
@@ -738,7 +750,7 @@ def test_newchain_account_encrypt(
     get_encrypt_test_params(),
     ids=[
         'hex_str',
-        'eth_keys.datatypes.PrivateKey',
+        'newchain_keys.datatypes.PrivateKey',
         'hex_str_provided_kdf',
         'hex_str_default_kdf_provided_iterations',
         'hex_str_pbkdf2_provided_iterations',

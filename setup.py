@@ -50,10 +50,11 @@ setup(
     # *IMPORTANT*: Don't manually change the version here. Use `make bump`, as described in readme
     version="0.3.0",
     description="""newchain-account: Sign NewChain transactions and messages with local private keys""",
-    long_description_markdown_filename='README.md',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     author='Xia Wu',
     author_email='xiawu@zeuux.org',
-    url='https://github.com/xiawu/newchain-account.py',
+    url='https://github.com/newtonproject/newchain-lib-account-py',
     include_package_data=True,
     package_data={
         "newchain_account": [
@@ -64,12 +65,13 @@ setup(
     install_requires=[
         "bitarray>=2.4.0,<3",
         "eth-abi>=3.0.0,<4",
-        "newchain-keyfile>=0.1.0",
-        "newchain-keys>=0.1.0",
+        "newchain-keys>=0.2.0",
+        "newchain-keyfile>=0.2.0",
         "eth-rlp>=0.3.0,<1",
         "eth-utils>=2.0.0,<3",
         "hexbytes>=0.1.0,<1",
         "rlp>=1.0.0,<4",
+        "base58>=1.0.3",
     ],
     python_requires=">=3.6, <4",
     extras_require=extras_require,

@@ -5,7 +5,7 @@ from typing import (
 )
 import unicodedata
 
-from eth_keys import (
+from newchain_keys import (
     keys,
 )
 from eth_utils import (

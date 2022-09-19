@@ -27,8 +27,8 @@ You can set up your dev environment with:
 
 ```sh
 
-git clone git@github.com:xiawu/newchain-account.py.git
-cd newchain-account.py
+git clone git@github.com:newtonproject/newchain-lib-account-py.git
+cd newchain-lib-account-py
 virtualenv -p python3 venv
 . venv/bin/activate
 pip install -e ".[dev]"

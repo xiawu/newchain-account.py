@@ -4,7 +4,7 @@ from hexbytes import (
     HexBytes,
 )
 
-from eth_account._utils.typed_transactions import (
+from newchain_account._utils.typed_transactions import (
     AccessListTransaction,
     DynamicFeeTransaction,
     TypedTransaction,

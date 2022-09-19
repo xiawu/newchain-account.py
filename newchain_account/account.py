@@ -582,7 +582,7 @@ class Account:
 
         :param signable_message: the encoded message for signing
         :param private_key: the key to sign the message with
-        :type private_key: hex str, bytes, int or :class:`eth_keys.datatypes.PrivateKey`
+        :type private_key: hex str, bytes, int or :class:`newchain_keys.datatypes.PrivateKey`
         :returns: Various details about the signature - most importantly the fields: v, r, and s
         :rtype: ~newchain_account.datastructures.SignedMessage
 
